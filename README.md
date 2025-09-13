@@ -141,7 +141,7 @@ sudo crontab -e
 0 2 * * * /usr/local/bin/mysql-backup.sh >> /var/log/mysql-backup.log 2>&1
 
 ### Her saat başı yedek al (opsiyonel)
-# 0 * * * * /usr/local/bin/mysql-backup.sh >> /var/log/mysql-backup-hourly.log 2>&1
+### 0 * * * * /usr/local/bin/mysql-backup.sh >> /var/log/mysql-backup-hourly.log 2>&1
 ## 8.2. Cron Kontrolü
 ### Cron job'ları listele
 sudo crontab -l
