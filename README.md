@@ -3,40 +3,37 @@
 # 1. Sistem Güncellemeleri
 sudo apt update && sudo apt upgrade -y
 # 2. Restic Kurulumu (Ubuntu)
+
 wget https://github.com/restic/restic/releases/download/v0.16.2/restic_0.16.2_linux_amd64.bz2
+
 bzip2 -d restic_0.16.2_linux_amd64.bz2
+
 chmod +x restic_0.16.2_linux_amd64
+
 sudo mv restic_0.16.2_linux_amd64 /usr/local/bin/restic
 
 
 ## Kurulumu doğrula
 restic version
 
-# 3. MySQL Kurulumu
+# 3. MySQL Kurulumu (Not: Eğer MySQL zaten kurulu ise bu adımları atlayabilirsiniz)
 
-## Not: Eğer MySQL zaten kurulu ise bu adımları atlayabilirsiniz
-
-## MySQL server kur
+## MySQL server kurma başlatma
 sudo apt install mysql-server -y
 
-## MySQL servisini başlat
 sudo systemctl start mysql
+
 sudo systemctl enable mysql
 
-## Güvenlik ayarlarını yap
 sudo mysql_secure_installation
 
-### 3.1. MySQL Bağlantı Testi
-
-## MySQL bağlantısını test et
 mysql -u root -p -e "SHOW DATABASES;"
 
 # 4. MySQL Yapılandırması
 
-## MySQL'e bağlan
+## MySQL'e bağlan ve örnek veritabanı kur
 sudo mysql -u root -p
 
-## Örnek veritabanı oluştur
 CREATE DATABASE company;
 USE company;
 
@@ -61,22 +58,26 @@ mysql -u root -p -e "SHOW DATABASES;"
 
 ## Backup dizini oluşturma
 sudo mkdir -p /backup/restic-repo
+
 sudo chown -R $USER:$USER /backup/restic-repo
+
 echo 'export RESTIC_REPOSITORY=/backup/restic-repo' >> ~/.bashrc
+
 echo 'export RESTIC_PASSWORD="guclu_sifre_123"' >> ~/.bashrc
+
 echo 'export RESTIC_COMPRESSION=auto' >> ~/.bashrc
 
 ## Değişkenleri yükle
 source ~/.bashrc
 
 # 5.1. Environment Variables Kontrolü
-## Environment variables'ların doğru ayarlandığını kontrol et
+
 echo $RESTIC_REPOSITORY
+
 echo $RESTIC_PASSWORD
 
 # 6. Repository Initialize Yapma
 
-## Repoyu başlat
 restic init
 echo "Repository oluşturuldu: $(restic snapshots 2>/dev/null | head -n 1)"
 
