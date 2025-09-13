@@ -1,4 +1,4 @@
-# Restic Kurulum
+# Restic Kurulum(restic 0.16.2 compiled with go1.21.3 on linux/amd64-14.09.2025 Itibari ile güncel versiyondur.)
 
 # 1. Sistem Güncellemeleri
 sudo apt update && sudo apt upgrade -y
