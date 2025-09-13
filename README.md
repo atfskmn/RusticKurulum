@@ -165,8 +165,6 @@ restic snapshots --time="2025-09-14"
 
 # Belirli bir dosya yolundaki snapshot'lar
 restic snapshots --path "/tmp/mysql-backup"
-### 9.2. Repository İstatistikleri
-bash
 # Repository boyutu
 restic stats
 
