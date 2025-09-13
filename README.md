@@ -3,17 +3,11 @@
 # 1. Sistem Güncellemeleri
 sudo apt update && sudo apt upgrade -y
 # 2. Restic Kurulumu (Ubuntu)
-## Restic indir
 wget https://github.com/restic/restic/releases/download/v0.16.2/restic_0.16.2_linux_amd64.bz2
-
-## Dosyayı çıkar
 bzip2 -d restic_0.16.2_linux_amd64.bz2
-
-## Çalıştırma izni ver
 chmod +x restic_0.16.2_linux_amd64
-
-## Sistem PATH'ine taşı
 sudo mv restic_0.16.2_linux_amd64 /usr/local/bin/restic
+
 
 ## Kurulumu doğrula
 restic version
@@ -65,13 +59,9 @@ mysql -u root -p -e "SHOW DATABASES;"
 
 # 5. Restic Reposu Oluşturma
 
-## Backup dizini oluştur
+## Backup dizini oluşturma
 sudo mkdir -p /backup/restic-repo
-
-## Klasör sahipliğini ayarla
 sudo chown -R $USER:$USER /backup/restic-repo
-
-## Kalıcı environment variables ekle
 echo 'export RESTIC_REPOSITORY=/backup/restic-repo' >> ~/.bashrc
 echo 'export RESTIC_PASSWORD="guclu_sifre_123"' >> ~/.bashrc
 echo 'export RESTIC_COMPRESSION=auto' >> ~/.bashrc
@@ -88,8 +78,6 @@ echo $RESTIC_PASSWORD
 
 ## Repoyu başlat
 restic init
-
-## Başarı mesajı kontrol et
 echo "Repository oluşturuldu: $(restic snapshots 2>/dev/null | head -n 1)"
 
 # 7. Backup Script Oluşturma
